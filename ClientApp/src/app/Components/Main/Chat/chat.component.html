@@ -1,6 +1,6 @@
 <div id="message-box">
     <ul id="messages-container" class="container-fluid">
-        <li class="no-text-decoration" *ngFor="let message of currentState.messages">
+        <li class="no-text-decoration" *ngFor="let message of currentState.currentMessages">
             <span class="message-user">{{message.user}}</span>
             <span class="message-date"> {{message.date}}</span>
             <p class="message-message">{{message.message}}</p>
@@ -13,5 +13,3 @@
         <input autocomplete="off" name="input-field" class="input-field form-control" type="text" placeholder="" [(ngModel)]="message" />
     </form>
 </div>
-
-{{state}}

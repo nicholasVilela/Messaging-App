@@ -10,9 +10,9 @@ export class UserStateModel {
     name: 'user',
     defaults: {
         user: {
-            uid: '1',
-            displayName: '2',
-            email: '3'
+            uid: null,
+            displayName: null,
+            email: null
         }
     }
 })

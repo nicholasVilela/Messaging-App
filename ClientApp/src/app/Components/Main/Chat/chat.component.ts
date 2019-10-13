@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { constructor } from 'q';
 import { store } from '@angular/core/src/render3/instructions';
 import { UserState } from 'src/app/State/user.state';
+import { AddMessage } from 'src/app/Actions/app.actions';
 
 @Component({
     selector: 'app-chat',
@@ -34,18 +35,25 @@ export class ChatComponent implements OnInit {
     message: string
 
     sendMessage() {
-        console.log(this.currentState)
-        console.log(this.currentUser)
-        this.signalRService.sendChannelMessage(this.currentState.currentChannel.name, this.currentUser.displayName, this.message)
-        this.firebaseService.addMessage(this.currentState.currentChannel.name, this.currentUser.displayName, this.message)
+        this.getState()
+        this.signalRService.sendChannelMessage(this.currentState.currentChannel, this.currentUser.displayName, this.message)
+        this.firebaseService.addMessage(this.currentState.currentChannel, this.currentUser.displayName, this.message)
+        // this.store.dispatch(new AddMessage({
+        //     user: this.currentUser.displayName,
+        //     message: this.message
+        // }))
         this.message = ''
+        console.log(this.currentState.currentMessages)
+        console.log(this.currentUser)
     }
 
     getState() {
+        this.appState.subscribe(x => this.currentState = x)
+        this.userState.subscribe(x => this.currentUser = x)
     }
 
     ngOnInit() { 
         // this.getState()
-        this.firebaseService.readMessages(this.currentState.currentChannel.name)
+        this.firebaseService.readMessages(this.currentState.channelSet[0].name)
     }
 }

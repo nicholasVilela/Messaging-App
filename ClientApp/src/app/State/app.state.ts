@@ -1,29 +1,21 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store'
-import { UserModel, AppModel, ChannelModel } from '../Models/app.model'
-import { ChangeChannelSet, ChangeCurrentChannel, AddMessage } from '../Actions/app.actions'
+import { UserModel, AppModel, ChannelModel, MessageModel } from '../Models/app.model'
+import { ChangeChannelSet, ChangeCurrentChannel, AddMessage, ClearChannelSet, ClearCurrentMessages } from '../Actions/app.actions'
+import { appendFile } from 'fs'
+import { copyStyles } from '@angular/animations/browser/src/util'
 
 export class AppStateModel {
-    currentChannel: ChannelModel
+    currentChannel: string
     channelSet: ChannelModel[]
+    currentMessages: MessageModel[]
 }
 
 @State<AppStateModel>({
     name: 'app',
     defaults: {
-        currentChannel: {
-            name: 'General',
-            description: 'General Chat',
-            messages: [],
-            adminUID: '1',
-            adminName: 'Nick'
-        },
-        channelSet: [{
-            name: 'General',
-            description: 'General Chat',
-            messages: [],
-            adminUID: '1',
-            adminName: 'Nick'
-        }]
+        currentChannel: null,
+        channelSet: [],
+        currentMessages: []
     }
 })
 
@@ -34,29 +26,40 @@ export class AppState {
     }
 
     @Action(ChangeChannelSet)
-    changeChannelSet({getState, patchState}, {payload}: ChangeChannelSet) {
+    changeChannelSet({getState, patchState}: StateContext<AppStateModel>, {payload}: ChangeChannelSet) {
         const state = getState()
         patchState({
-            ...state,
             channelSet: [...state.channelSet, payload]
         })
     }
 
     @Action(ChangeCurrentChannel)
-    changeCurrentChannel({getState, patchState}, {payload}: ChangeCurrentChannel) {
+    changeCurrentChannel({getState, patchState}: StateContext<AppStateModel>, {payload}: ChangeCurrentChannel) {
         const state = getState()
         patchState({
-            ...state,
             currentChannel: payload
         })
     }
 
+    @Action(ClearChannelSet)
+    clearChannelSet({getState, patchState}: StateContext<AppStateModel>, {payload}: ClearChannelSet) {
+        patchState({
+            channelSet: payload
+        })
+    }
+
     @Action(AddMessage)
-    AddMessage({getState, patchState}, {payload}: AddMessage) {
+    addMessage({getState, patchState}: StateContext<AppStateModel>, {payload}: AddMessage) {
         const state = getState()
         patchState({
-            ...state,
-            currentChannel: [...state.messages, payload]
+            currentMessages: [...state.currentMessages, payload]
+        })
+    }
+
+    @Action(ClearCurrentMessages)
+    clearCurrentMessages({patchState}: StateContext<AppStateModel>, {payload}: ClearCurrentMessages) {
+        patchState({
+            currentMessages: payload
         })
     }
 }

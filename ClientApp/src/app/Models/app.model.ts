@@ -12,12 +12,13 @@ export interface UserModel {
 export interface ChannelModel {
     name: string
     description: string
-    messages: []
+    messages: MessageModel[]
     adminUID: string
     adminName: string
 }
 
 export interface AppModel {
-    currentChannel: ChannelModel
+    currentChannel: string
     channelSet: ChannelModel[]
+    currentMessages: MessageModel[]
 }

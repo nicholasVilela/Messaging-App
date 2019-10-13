@@ -6,7 +6,7 @@ import { Store, Select } from '@ngxs/store'
 import { AppState } from 'src/app/State/app.state'
 import { Observable } from 'rxjs'
 import { UserState } from 'src/app/State/user.state'
-import { ChangeCurrentChannel } from 'src/app/Actions/app.actions'
+import { ChangeCurrentChannel, ClearCurrentMessages, ClearChannelSet } from 'src/app/Actions/app.actions'
 
 @Component({
     selector: 'app-sidebar',
@@ -25,6 +25,8 @@ export class SidebarComponent implements OnInit {
     ) { 
         this.userState.subscribe(x => this.currentUser = x)
         this.appState.subscribe(x => this.currentState = x)
+        this.store.dispatch(new ClearChannelSet([]))
+        this.firebaseService.getAllChannels()
         console.log(this.currentUser)
         console.log(this.currentState)
     }
@@ -54,13 +56,14 @@ export class SidebarComponent implements OnInit {
         this.flipModal()
     }
 
-    changeChannel(channel: ChannelModel) {
-        this.signalRService.joinChannel(channel.name)
+    changeChannel(channel: string) {
+        this.store.dispatch(new ClearCurrentMessages([]))
+        this.signalRService.joinChannel(channel)
         this.store.dispatch(new ChangeCurrentChannel(channel))
-        this.firebaseService.readMessages(channel.name)
+        this.firebaseService.readMessages(channel)
     }
 
     ngOnInit() {
-        this.signalRService.joinChannel(this.currentState.currentChannel.name)
+        this.signalRService.joinChannel(this.currentState.channelSet[0].name)
      }
 }
