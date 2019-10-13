@@ -24,6 +24,14 @@ export class FirebaseService {
         } 
     }
 
+    public deleteChannel(channel: string) {
+        this.database
+            .ref(`Channels/${channel}`)
+            .remove()
+
+        this.getAllChannels()
+    }
+
     public addUser(user: UserModel) {
         console.log('Trying to add User')
         const userKey = this.database

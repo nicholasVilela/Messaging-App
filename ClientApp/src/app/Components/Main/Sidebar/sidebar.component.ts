@@ -42,6 +42,11 @@ export class SidebarComponent implements OnInit {
         this.showModal = !this.showModal
     }
 
+    deleteChannel(channel: string) {
+        console.log(channel)
+        this.firebaseService.deleteChannel(channel)
+    }
+
     createChannel() {
         const newChannel: ChannelModel = {
             name: this.newChannelName,
