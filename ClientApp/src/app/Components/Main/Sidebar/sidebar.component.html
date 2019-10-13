@@ -1,0 +1,37 @@
+<div id="sidebar" class="container-fluid no-text-decoration">
+    <span class="display-name">{{currentUser.displayName}}</span>
+
+    <div id="channels">
+        <label for="channel-lists">CHANNELS</label>
+        <button class="create-channel" (click)="flipModal()">+</button>
+        <li id="channel-list" *ngFor="let channel of currentState.channelSet">
+            <a [ngClass]="{'active' : channel == currentState.currentChannel}" class="channel" (click)="changeChannel(channel.name)"># {{channel.name}}</a>
+        </li>
+    </div>
+
+    <div id="direct-messages">
+        <label for="messages-list">DIRECT MESSAGES</label>
+        <li id="messages-list">
+            {{test.name}}
+        </li>
+    </div> 
+</div>
+
+
+<div class="create-channel-modal" *ngIf="showModal">
+    <div class="margins">
+        <section class="create-channel-header">
+            <h1 class="title">Create a channel</h1>
+            <button (click)="flipModal()" class="close-modal">X</button>
+        </section>
+    
+        <form class="input-fields">
+            <label for="name">Name</label>
+            <input name="name" autocomplete="off" class="input" id="name" type="text" placeholder="e.g. general-channel" [(ngModel)]="newChannelName"/>
+            <label for="desc">Description(optional)</label>
+            <input name="desc" autocomplete="off" class="input" id="desc" type="text" placeholder="What's this channel about?" [(ngModel)]="newChannelDesc" />
+        </form>
+    
+        <button (click)="createChannel()">Create Channel</button>
+    </div>
+</div>

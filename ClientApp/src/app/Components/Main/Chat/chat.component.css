@@ -1,0 +1,51 @@
+.input-field {
+    display: flex;
+    position: absolute;
+    height: 7%;
+    border: 1px solid #D0E1F9;
+    border-radius: 5px;
+    bottom: 3%;
+    right: 1.9%;
+    width: 81.1%;
+    background-color: #1E1F26;
+    color: whitesmoke;
+}
+
+#message-box {
+    display: flex;
+    width: 81%;
+    position: absolute;
+    height: 30.8em;
+    /* max-height: 30.8em; */
+    overflow-y: scroll;
+    top: 3.3em;
+    right: 0;
+    /* color: #D0E1F9; */
+    color: whitesmoke;
+    
+}
+
+.no-text-decoration {
+    list-style-type: none;
+}
+
+.message-text {
+    margin-left: 3%;
+}
+
+.message-user {
+    font-weight: bolder;
+}
+
+.message-message {
+
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;    
+    background-color: #D0E1F9;
+}

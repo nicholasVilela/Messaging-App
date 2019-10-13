@@ -1,0 +1,71 @@
+#sidebar {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 15%;
+    background-color: #1E1F26;
+    color: #D0E1F9;
+    left: 0;
+    border-right: 1px solid #D0E1F9; 
+    padding-right: 15px;
+    padding-left: 15px;
+} 
+
+.no-text-decoration {
+    list-style-type: none;
+}
+
+.channel:hover {
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #283655;
+    width: 100%;
+    cursor: pointer;
+}
+.active {
+    background-color: #4d648d;
+}
+.active:hover {
+    background-color: #4d648d;
+}
+.channel {
+    display: block;
+}
+
+
+.create-channel-modal {
+    display: flex;
+    background-color: white;
+    height: 40%;
+    width: 20%;
+    border-radius: 5px;
+    position: relative;
+    align-items: center;  
+    justify-content: center;
+    /* margin: auto; */
+}
+
+.create-channel-header {
+
+}
+
+.title {
+
+}
+
+.close-modal {
+
+}
+
+.input {
+    border-radius: 5px;
+}
+
+.input-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.margins {
+    margin: 4%;
+}
