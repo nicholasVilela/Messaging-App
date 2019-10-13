@@ -6,7 +6,6 @@ import { AppState } from '../../../State/app.state'
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { constructor } from 'q';
-import { store } from '@angular/core/src/render3/instructions';
 import { UserState } from 'src/app/State/user.state';
 import { AddMessage } from 'src/app/Actions/app.actions';
 

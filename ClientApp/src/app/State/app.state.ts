@@ -1,8 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store'
 import { UserModel, AppModel, ChannelModel, MessageModel } from '../Models/app.model'
 import { ChangeChannelSet, ChangeCurrentChannel, AddMessage, ClearChannelSet, ClearCurrentMessages } from '../Actions/app.actions'
-import { appendFile } from 'fs'
-import { copyStyles } from '@angular/animations/browser/src/util'
 
 export class AppStateModel {
     currentChannel: string
