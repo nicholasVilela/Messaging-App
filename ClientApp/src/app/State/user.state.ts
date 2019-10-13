@@ -27,9 +27,7 @@ export class UserState {
     addUser({getState, patchState}, {payload}: AddUser) {
         const state = getState()
         patchState({
-            uid:  payload.uid,
-            displayName: payload.displayName,
-            email: payload.email
+            user: payload
         })
     }
 }
