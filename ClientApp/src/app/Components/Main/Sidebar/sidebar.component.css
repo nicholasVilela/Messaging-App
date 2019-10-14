@@ -29,7 +29,7 @@
     background-color: #4d648d;
 }
 .channel {
-    display: block;
+    display: inline-flex;
 }
 
 
@@ -40,8 +40,7 @@
     width: 20%;
     border-radius: 5px;
     position: relative;
-    align-items: center;  
-    justify-content: center;
+    left: 15%;
     /* margin: auto; */
 }
 
@@ -68,4 +67,29 @@
 
 .margins {
     margin: 4%;
+}
+
+.delete-channel {
+    display: flex;
+    background-color: whitesmoke;
+    color: black;
+    /* text-align: center; */
+    text-decoration: none;
+    font-size: 16px;
+    justify-content: flex-start;
+}
+
+.create-channel {
+    background-color: whitesmoke;
+    color: black;
+    /* text-align: center; */
+    border-radius: 100%;
+    text-decoration: none;
+    top: 0.2rem;
+    text-align: center;
+    /* width: 30%; */
+    left: 3rem;
+    /* height: 1rem;     */
+    /* width: 1rem; */
+    position: relative;
 }

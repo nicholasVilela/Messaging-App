@@ -5,8 +5,8 @@
         <label for="channel-lists">CHANNELS</label>
         <button class="create-channel" (click)="flipModal()">+</button>
         <li id="channel-list" *ngFor="let channel of currentState.channelSet">
-            <a [ngClass]="{'active' : channel == currentState.currentChannel}" class="channel" (click)="changeChannel(channel.name)"># {{channel.name}}</a>
-            <button (click)="deleteChannel(channel.name)">X</button>
+            <a [ngClass]="{'active' : channel == currentState.currentChannel}" class="channel" (click)="changeChannel(channel.name)"># {{channel.name}}  <button class="delete-channel" (click)="deleteChannel(channel.name)">X</button></a>
+            
         </li>
     </div>
 
