@@ -1,20 +1,23 @@
-<div id="sidebar" class="container-fluid no-text-decoration">
-    <span class="display-name">{{currentUser.displayName}}</span>
-
-    <div id="channels">
+<div class="sidebar-container">
+    <div id="sidebar" class="container-fluid no-text-decoration">
+        <span class="display-name">{{currentUser.displayName}}</span>
+        <hr class="color">
+    
         <label for="channel-lists">CHANNELS</label>
-        <button class="create-channel" (click)="flipModal()">+</button>
-        <li id="channel-list" *ngFor="let channel of currentState.channelSet">
-            <a [ngClass]="{'active' : channel == currentState.currentChannel}" class="channel" (click)="changeChannel(channel.name)"># {{channel.name}}</a>
-            <button (click)="deleteChannel(channel.name)">X</button>
-        </li>
+        <button class="create-channel" (click)="flipModal()">Create</button>
+        <div id="channels">
+            <li id="channel-list" *ngFor="let channel of currentState.channelSet">
+                <a [ngClass]="{'active' : channel == currentState.currentChannel}" class="channel" (click)="changeChannel(channel.name)"># {{channel.name}}</a>
+                <button class="delete-channel" (click)="deleteChannel(channel.name)">X</button>
+            </li>
+        </div>
+    
+        <div id="direct-messages">
+            <label for="messages-list">DIRECT MESSAGES</label>
+            <li id="messages-list">
+            </li>
+        </div> 
     </div>
-
-    <div id="direct-messages">
-        <label for="messages-list">DIRECT MESSAGES</label>
-        <li id="messages-list">
-        </li>
-    </div> 
 </div>
 
 

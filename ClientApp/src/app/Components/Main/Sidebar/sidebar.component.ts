@@ -39,6 +39,8 @@ export class SidebarComponent implements OnInit {
     newChannelDesc: string
 
     flipModal() {
+        this.newChannelDesc = ''
+        this.newChannelName = ''
         this.showModal = !this.showModal
     }
 

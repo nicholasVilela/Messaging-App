@@ -1,0 +1,13 @@
+.header {
+    display: inline-flex;
+    border: solid #D0E1F9 1px;
+    position: absolute;
+    color: #D0E1F9;
+    width: 85.1%;
+    height: 3rem;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
