@@ -1,4 +1,4 @@
-#sidebar {
+/* #sidebar {
     display: block;
     position: absolute;
     height: 100%;
@@ -8,8 +8,26 @@
     left: 0;
     border-right: 1px solid #D0E1F9; 
     padding-right: 15px;
-    padding-left: 15px;
-} 
+    padding-left: 15px; */
+/* }  */
+
+#sidebar {
+    display: flex;
+    color: #D0E1F9;
+    border-right: 1px solid #D0E1F9; 
+    flex-wrap: wrap;
+    /* height: 39em; */
+}
+
+.sidebar-container{
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    width: 15%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
 .no-text-decoration {
     list-style-type: none;
@@ -40,7 +58,8 @@
     width: 20%;
     border-radius: 5px;
     position: relative;
-    left: 15%;
+    left: 17.4%;
+    top: 3.2rem;
     /* margin: auto; */
 }
 
@@ -83,8 +102,9 @@
     background-color: whitesmoke;
     color: black;
     /* text-align: center; */
-    border-radius: 100%;
+    border-radius: 200px;
     text-decoration: none;
+    /* font-size: 20px; */
     top: 0.2rem;
     text-align: center;
     /* width: 30%; */
