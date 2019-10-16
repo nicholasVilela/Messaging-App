@@ -18,7 +18,7 @@ export interface ChannelModel {
 }
 
 export interface AppModel {
-    currentChannel: string
+    currentChannel: ChannelModel
     channelSet: ChannelModel[]
     currentMessages: MessageModel[]
 }

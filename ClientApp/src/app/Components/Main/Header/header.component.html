@@ -1,7 +1,6 @@
 <div class="flex-end">
     <div class="header">
-        <h3 class="channel-name">#Channel-Name</h3>
-        <p class="users">Users: 99</p>
-        <p class="channel-desc">Channel description is what goes here</p>
+        <h3 class="channel-name">#{{!currentState.currentChannel ? '' : currentState.currentChannel.name}}</h3>
+        <p class="channel-desc">{{!currentState.currentChannel ? '' : currentState.currentChannel.description}}</p>
     </div>
 </div>

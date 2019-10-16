@@ -27,8 +27,7 @@ export class SidebarComponent implements OnInit {
         this.appState.subscribe(x => this.currentState = x)
         this.store.dispatch(new ClearChannelSet([]))
         this.firebaseService.getAllChannels()
-        console.log(this.currentUser)
-        console.log(this.currentState)
+        this.signalRService.addChannelSetListener()
     }
 
     currentState: AppModel
@@ -45,8 +44,9 @@ export class SidebarComponent implements OnInit {
     }
 
     deleteChannel(channel: string) {
-        console.log(channel)
         this.firebaseService.deleteChannel(channel)
+        this.store.dispatch(new ClearChannelSet([]))
+        this.signalRService.updateChannelSet()
     }
 
     createChannel() {
@@ -60,17 +60,20 @@ export class SidebarComponent implements OnInit {
 
         this.firebaseService.addChannel(newChannel)
         this.firebaseService.getAllChannels()
+        this.changeChannel(newChannel)
         this.flipModal()
     }
 
-    changeChannel(channel: string) {
+    changeChannel(channel: ChannelModel) {
         this.store.dispatch(new ClearCurrentMessages([]))
-        this.signalRService.joinChannel(channel)
+        this.signalRService.joinChannel(channel.name)
         this.store.dispatch(new ChangeCurrentChannel(channel))
-        this.firebaseService.readMessages(channel)
+        this.firebaseService.readMessages(channel.name)
     }
 
     ngOnInit() {
-        this.signalRService.joinChannel(this.currentState.channelSet[0].name)
+        setTimeout(() => {
+            this.changeChannel(this.currentState.channelSet[0])
+        }, 1000)
      }
 }

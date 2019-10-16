@@ -4,15 +4,17 @@ import { AppModel, ChannelModel } from '../Models/app.model'
 // import { AddMessageAction } from '../Actions/app.action' 
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AddMessage } from '../Actions/app.actions';
+import { AddMessage, ClearChannelSet, ChangeChannelSet, ClearCurrentMessages } from '../Actions/app.actions';
+import { FirebaseService } from './firebase.service';
 
 @Injectable()
 export class SignalRService {
 
     constructor(
-        public store: Store) {
+        public store: Store,
+        public firebaseService: FirebaseService) {
             this.createConnection()
-            this.addMessageListener()
+            this.addListener()
             this.startConnection()
          }
 
@@ -32,7 +34,7 @@ export class SignalRService {
             .catch(err => console.log('Problem starting the connection... ' + err))
     }
 
-    public addMessageListener() {
+    public addListener() {
         this.connection
             .on('ReceiveMessage', (user: string, message: string) => {
                 this.store.dispatch(new AddMessage({
@@ -40,6 +42,21 @@ export class SignalRService {
                     message: message
                 }))
             })
+    }
+
+    public addChannelSetListener() {
+        this.connection
+            .on('UpdateAllChannelSet', () => {
+                this.store.dispatch(new ClearChannelSet([]))
+                this.firebaseService.getAllChannels()
+            })
+    }
+
+    public updateChannelSet() {
+        this.connection
+            .invoke('UpdateChannelSet')
+            .then(() => console.log('Updated channel set'))
+            .catch(err => console.log(err))
     }
     
     public sendChannelMessage(channel: string, user: string, message: string) {
@@ -60,6 +77,13 @@ export class SignalRService {
         this.connection
             .invoke('LeaveChannel', channel)
             .then(() => console.log('Left channel.'))
+            .catch(err => console.log(err))
+    }
+
+    public sendDirectMessage(directedUser: string, user: string, message: string) {
+        this.connection
+            .invoke('SendDirectMessage', directedUser, user, message)
+            .then(() => console.log(`Send to ${directedUser}`))
             .catch(err => console.log(err))
     }
 }

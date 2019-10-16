@@ -35,15 +35,9 @@ export class ChatComponent implements OnInit {
 
     sendMessage() {
         this.getState()
-        this.signalRService.sendChannelMessage(this.currentState.currentChannel, this.currentUser.displayName, this.message)
-        this.firebaseService.addMessage(this.currentState.currentChannel, this.currentUser.displayName, this.message)
-        // this.store.dispatch(new AddMessage({
-        //     user: this.currentUser.displayName,
-        //     message: this.message
-        // }))
+        this.signalRService.sendChannelMessage(this.currentState.currentChannel.name, this.currentUser.displayName, this.message)
+        this.firebaseService.addMessage(this.currentState.currentChannel.name, this.currentUser.displayName, this.message)
         this.message = ''
-        console.log(this.currentState.currentMessages)
-        console.log(this.currentUser)
     }
 
     getState() {

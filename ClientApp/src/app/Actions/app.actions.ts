@@ -15,7 +15,7 @@ export class AddMessage {
 export class ChangeCurrentChannel {
     static readonly type = 'CHANGE_CHANNEL'
 
-    constructor(public payload: string) {}
+    constructor(public payload: ChannelModel) {}
 }
 
 export class ChangeChannelSet {
