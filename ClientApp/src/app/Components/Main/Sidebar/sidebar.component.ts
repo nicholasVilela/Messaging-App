@@ -60,17 +60,20 @@ export class SidebarComponent implements OnInit {
 
         this.firebaseService.addChannel(newChannel)
         this.firebaseService.getAllChannels()
+        this.changeChannel(newChannel)
         this.flipModal()
     }
 
-    changeChannel(channel: string) {
+    changeChannel(channel: ChannelModel) {
         this.store.dispatch(new ClearCurrentMessages([]))
-        this.signalRService.joinChannel(channel)
+        this.signalRService.joinChannel(channel.name)
         this.store.dispatch(new ChangeCurrentChannel(channel))
-        this.firebaseService.readMessages(channel)
+        this.firebaseService.readMessages(channel.name)
     }
 
     ngOnInit() {
-        this.signalRService.joinChannel(this.currentState.channelSet[0].name)
+        setTimeout(() => {
+            this.signalRService.joinChannel(this.currentState.channelSet[0].name)
+        }, 1000)
      }
 }

@@ -7,6 +7,12 @@
     height: 3rem;
 }
 
+.channel-desc {
+    position: relative;
+    top: 20%;
+    left: 1%;
+}
+
 .flex-end {
     display: flex;
     justify-content: flex-end;
