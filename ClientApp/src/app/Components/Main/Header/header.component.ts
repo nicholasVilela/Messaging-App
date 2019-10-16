@@ -10,7 +10,7 @@ import { AppModel } from 'src/app/Models/app.model';
     selector: 'app-header',
     templateUrl: 'header.component.html',
     styleUrls: ['./header.component.css'],
-    providers: [FirebaseService, SignalRService]
+    // providers: [FirebaseService, SignalRService]
 })
 
 export class HeaderComponent implements OnInit {

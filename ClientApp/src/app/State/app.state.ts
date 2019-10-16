@@ -3,7 +3,7 @@ import { UserModel, AppModel, ChannelModel, MessageModel } from '../Models/app.m
 import { ChangeChannelSet, ChangeCurrentChannel, AddMessage, ClearChannelSet, ClearCurrentMessages } from '../Actions/app.actions'
 
 export class AppStateModel {
-    currentChannel: string
+    currentChannel: ChannelModel
     channelSet: ChannelModel[]
     currentMessages: MessageModel[]
 }

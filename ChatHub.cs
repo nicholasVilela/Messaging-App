@@ -10,12 +10,12 @@ namespace SignalRChat.Hubs
 
         public async Task JoinChannel(string channelName) {
             await Groups.AddToGroupAsync(Context.ConnectionId, channelName);
-            await Clients.Group(channelName).SendAsync("ReceiveMessage", $"{Context.ConnectionId} has joined the channel {channelName}");
+            await Clients.Group(channelName).SendAsync("ReceiveMessage");
         }
 
         public async Task LeaveChannel(string channelName) {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, channelName);
-            await Clients.Group(channelName).SendAsync("ReceiveMessage", $"{Context.ConnectionId} has left the channel {channelName}");
+            await Clients.Group(channelName).SendAsync("ReceiveMessage");
         }
 
         public async Task SendSelfMessage(string user, string message) {
@@ -24,6 +24,14 @@ namespace SignalRChat.Hubs
 
         public async Task SendChannelMessage(string channelName, string user, string message) {
             await Clients.Group(channelName).SendAsync("ReceiveMessage", user, message);
+        }
+
+        public async Task SendDirectMessage(string directedUser, string user, string message) {
+            await Clients.User(directedUser).SendAsync("ReceiveMessage", user, message);
+        }
+
+        public async Task UpdateChannelSet() {
+            await Clients.All.SendAsync("UpdateAllChannelSet");
         }
     }
 }

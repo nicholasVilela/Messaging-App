@@ -2,7 +2,7 @@
     <ul id="messages-container" class="container-fluid">
         <li class="no-text-decoration" *ngFor="let message of currentState.currentMessages">
             <span class="message-user">{{message.user}}</span>
-            <span class="message-date"> {{message.date}}</span>
+            <span class="message-date">{{message.date}}</span>
             <p class="message-message">{{message.message}}</p>
         </li>
     </ul>
@@ -10,6 +10,6 @@
 
 <div class="container-fluid input-container">
     <form (ngSubmit)="sendMessage()">
-        <input autocomplete="off" name="input-field" class="input-field form-control" type="text" placeholder="Message #{{currentState.currentChannel}}" [(ngModel)]="message" />
+        <input autocomplete="off" name="input-field" class="input-field form-control" type="text" placeholder="Message #{{currentState.currentChannel.name}}" [(ngModel)]="message" />
     </form>
 </div>
