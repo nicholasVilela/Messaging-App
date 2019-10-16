@@ -58,6 +58,11 @@ export class SignalRService {
             .then(() => console.log('Updated channel set'))
             .catch(err => console.log(err))
     }
+
+    // public resetCurrentChannel() {
+    //     this.connection
+    //         .invoke('')
+    // }
     
     public sendChannelMessage(channel: string, user: string, message: string) {
         this.connection
