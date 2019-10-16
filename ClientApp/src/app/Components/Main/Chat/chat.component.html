@@ -10,6 +10,6 @@
 
 <div class="container-fluid input-container">
     <form (ngSubmit)="sendMessage()">
-        <input autocomplete="off" name="input-field" class="input-field form-control" type="text" placeholder="Message #{{currentState.currentChannel.name}}" [(ngModel)]="message" />
+        <input autocomplete="off" name="input-field" class="input-field form-control" type="text" placeholder="Message #{{!currentState.currentChannel ? '' : currentState.currentChannel.name}}" [(ngModel)]="message" />
     </form>
 </div>
