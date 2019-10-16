@@ -5,7 +5,7 @@ import { AppModel, UserModel, MessageModel, ChannelModel } from '../Models/app.m
 import { firebaseConfig } from '../Config/firebase.config'
 import * as firebase from 'firebase'
 // import { State } from '../State/app.state'
-import { ChangeChannelSet, AddMessage, AddUser, ClearChannelSet } from '../Actions/app.actions'
+import { ChangeChannelSet, AddMessage, AddUser, ClearChannelSet, ChangeCurrentChannel } from '../Actions/app.actions'
 
 @Injectable()
 export class FirebaseService {
@@ -29,7 +29,13 @@ export class FirebaseService {
             .ref(`Channels/${channel}`)
             .remove()
 
-        this.getAllChannels()
+        this.store.dispatch(new ChangeCurrentChannel({
+            name: null,
+            description: null,
+            messages: null,
+            adminUID: null,
+            adminName: null
+        }))
     }
 
     public addUser(user: UserModel) {
@@ -76,7 +82,6 @@ export class FirebaseService {
     }
 
     public getAllChannels = () => {
-        this.store.dispatch(new ClearChannelSet([]))
         this.database
             .ref('Channels')
             .once('value')
