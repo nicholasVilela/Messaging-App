@@ -18,20 +18,16 @@ namespace SignalRChat.Hubs
             await Clients.Group(channelName).SendAsync("ReceiveMessage");
         }
 
-        public async Task SendSelfMessage(string user, string message) {
-            await Clients.Users(user).SendAsync("ReceiveMessage", user, message);
-        }
-
         public async Task SendChannelMessage(string channelName, string user, string message) {
             await Clients.Group(channelName).SendAsync("ReceiveMessage", user, message);
         }
 
-        public async Task SendDirectMessage(string directedUser, string user, string message) {
-            await Clients.User(directedUser).SendAsync("ReceiveMessage", user, message);
-        }
-
         public async Task UpdateChannelSet() {
             await Clients.All.SendAsync("UpdateAllChannelSet");
+        }
+
+        public async Task UpdateCurrentChannel(string channelName) {
+            await Clients.Group(channelName).SendAsync("UpdateGroupCurrentChannel");
         }
     }
 }

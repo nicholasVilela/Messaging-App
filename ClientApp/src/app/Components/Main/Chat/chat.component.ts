@@ -25,6 +25,7 @@ export class ChatComponent implements OnInit {
         public firebaseService: FirebaseService,
         private store: Store
     ) { 
+        
         this.appState.subscribe(x => this.currentState = x)
         this.userState.subscribe(x => this.currentUser = x)
     }
