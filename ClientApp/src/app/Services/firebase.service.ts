@@ -4,7 +4,6 @@ import { Store } from '@ngxs/store'
 import { AppModel, UserModel, MessageModel, ChannelModel } from '../Models/app.model'
 import { firebaseConfig } from '../Config/firebase.config'
 import * as firebase from 'firebase'
-// import { State } from '../State/app.state'
 import { ChangeChannelSet, AddMessage, AddUser, ClearChannelSet, ChangeCurrentChannel, ClearCurrentMessages } from '../Actions/app.actions'
 
 @Injectable()
@@ -50,7 +49,6 @@ export class FirebaseService {
         updates[`Users/${userKey}`] = user
 
         this.database.ref().update(updates)
-        console.log('SUCCESS')
     }
     
     public addMessage(channel: string, user: string, message: string) {

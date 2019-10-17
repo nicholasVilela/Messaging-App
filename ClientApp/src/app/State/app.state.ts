@@ -40,7 +40,7 @@ export class AppState {
     }
 
     @Action(ClearChannelSet)
-    clearChannelSet({getState, patchState}: StateContext<AppStateModel>, {payload}: ClearChannelSet) {
+    clearChannelSet({patchState}: StateContext<AppStateModel>, {payload}: ClearChannelSet) {
         patchState({
             channelSet: payload
         })
