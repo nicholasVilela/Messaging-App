@@ -68,7 +68,6 @@ export class SignalRService {
     public addGroupCurrentChannelListener() {
         this.connection 
             .on('UpdateGroupCurrentChannel', () => {
-                console.log('this is the first thing but not the next thing.')
                 this.store.dispatch(new ClearCurrentMessages([]))
                 this.store.dispatch(new ChangeCurrentChannel({
                     name: null,
@@ -77,10 +76,7 @@ export class SignalRService {
                     adminUID: null,
                     adminName: null
                 }))
-                console.log('did a thing.')
             })
-
-        console.log('did another thing but not the last thing.')
     }
  
     public sendChannelMessage(channel: string, user: string, message: string) {

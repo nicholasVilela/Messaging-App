@@ -47,7 +47,6 @@ export class ChatComponent implements OnInit {
     }
 
     ngOnInit() { 
-        // this.getState()
         this.firebaseService.readMessages(this.currentState.channelSet[0].name)
     }
 }
