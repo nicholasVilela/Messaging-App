@@ -23,10 +23,11 @@ export class SidebarComponent implements OnInit {
         public signalRService: SignalRService,
         public firebaseService: FirebaseService,
     ) { 
+        this.signalRService.addChannelSetListener()
         this.userState.subscribe(x => this.currentUser = x)
         this.appState.subscribe(x => this.currentState = x)
-        this.signalRService.updateChannelSet()
-        this.signalRService.addChannelSetListener()
+        // this.signalRService.updateChannelSet()
+        this.firebaseService.getAllChannels()
     }
 
     currentState: AppModel
@@ -64,8 +65,8 @@ export class SidebarComponent implements OnInit {
 
     changeChannel(channel: ChannelModel) {
         this.store.dispatch(new ClearCurrentMessages([]))
-        this.signalRService.joinChannel(channel.name)
         this.store.dispatch(new ChangeCurrentChannel(channel))
+        this.signalRService.joinChannel(channel.name)
         this.firebaseService.readMessages(channel.name)
     }
 
