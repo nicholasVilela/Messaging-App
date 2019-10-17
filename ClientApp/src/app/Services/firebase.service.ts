@@ -5,7 +5,7 @@ import { AppModel, UserModel, MessageModel, ChannelModel } from '../Models/app.m
 import { firebaseConfig } from '../Config/firebase.config'
 import * as firebase from 'firebase'
 // import { State } from '../State/app.state'
-import { ChangeChannelSet, AddMessage, AddUser, ClearChannelSet, ChangeCurrentChannel } from '../Actions/app.actions'
+import { ChangeChannelSet, AddMessage, AddUser, ClearChannelSet, ChangeCurrentChannel, ClearCurrentMessages } from '../Actions/app.actions'
 
 @Injectable()
 export class FirebaseService {

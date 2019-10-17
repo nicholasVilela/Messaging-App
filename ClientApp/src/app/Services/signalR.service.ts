@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core'
 import * as signalR from '@microsoft/signalr'
 import { AppModel, ChannelModel } from '../Models/app.model'
-// import { AddMessageAction } from '../Actions/app.action' 
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AddMessage, ClearChannelSet, ChangeChannelSet, ClearCurrentMessages } from '../Actions/app.actions';
+import { AddMessage, ClearChannelSet, ChangeChannelSet, ClearCurrentMessages, ChangeCurrentChannel } from '../Actions/app.actions';
 import { FirebaseService } from './firebase.service';
 
 @Injectable()
@@ -59,11 +58,31 @@ export class SignalRService {
             .catch(err => console.log(err))
     }
 
-    // public resetCurrentChannel() {
-    //     this.connection
-    //         .invoke('')
-    // }
-    
+    public updateCurrentChannel(channel: string) {
+        this.connection
+            .invoke('UpdateCurrentChannel', channel)
+            .then(() => console.log('Updated'))
+            .catch(err => console.log(err))
+    }
+
+    public addGroupCurrentChannelListener() {
+        this.connection 
+            .on('UpdateGroupCurrentChannel', () => {
+                console.log('this is the first thing but not the next thing.')
+                this.store.dispatch(new ClearCurrentMessages([]))
+                this.store.dispatch(new ChangeCurrentChannel({
+                    name: null,
+                    description: null,
+                    messages: null,
+                    adminUID: null,
+                    adminName: null
+                }))
+                console.log('did a thing.')
+            })
+
+        console.log('did another thing but not the last thing.')
+    }
+ 
     public sendChannelMessage(channel: string, user: string, message: string) {
         this.connection
             .invoke('SendChannelMessage', channel, user, message)
@@ -82,13 +101,6 @@ export class SignalRService {
         this.connection
             .invoke('LeaveChannel', channel)
             .then(() => console.log('Left channel.'))
-            .catch(err => console.log(err))
-    }
-
-    public sendDirectMessage(directedUser: string, user: string, message: string) {
-        this.connection
-            .invoke('SendDirectMessage', directedUser, user, message)
-            .then(() => console.log(`Send to ${directedUser}`))
             .catch(err => console.log(err))
     }
 }
